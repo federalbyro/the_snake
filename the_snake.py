@@ -33,7 +33,7 @@ SPEED = 7.5
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
 
 # Заголовок окна игрового поля:
-pygame.display.set_caption('Змейка')
+pygame.display.set_caption("Змейка")
 
 # Настройка времени:
 clock = pygame.time.Clock()
@@ -41,6 +41,11 @@ POISON_COLOR = (105, 0, 198)
 
 
 def handle_keys(game_object):
+    """
+    Обрабатывает нажатия клавиш для изменения направления движения змейки.
+
+    :param game_object: Экземпляр класса Snake.
+    """
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -58,6 +63,14 @@ def handle_keys(game_object):
 
 # Тут опишите все классы игры.
 class GameObject:
+    """
+    Базовый класс для игровых объектов.
+
+    Атрибуты:
+        position (tuple): Позиция объекта на игровом поле.
+        body_color (tuple): Цвет объекта.
+    """
+
     def __init__(self, position, body_color=None):
         self.position = position
         self.body_color = body_color
@@ -67,6 +80,12 @@ class GameObject:
 
 
 class Apple(GameObject):
+    """
+    Класс, описывающий яблоко в игре.
+
+    Наследуется от GameObject.
+    """
+
     def __init__(self, body_color=APPLE_COLOR):
         super().__init__(position=None, body_color=body_color)
         self.randomize_position()
@@ -116,8 +135,10 @@ class Snake(GameObject):
         # Получаем текущую позицию головы
         current = self.positions[0]
         x, y = self.direction
-        new_position = ((current[0] + (x * GRID_SIZE)) % SCREEN_WIDTH,
-                        (current[1] + (y * GRID_SIZE)) % SCREEN_HEIGHT)
+        new_position = (
+            (current[0] + (x * GRID_SIZE)) % SCREEN_WIDTH,
+            (current[1] + (y * GRID_SIZE)) % SCREEN_HEIGHT,
+        )
         if new_position in self.positions[2:]:
             self.reset()
         else:
@@ -132,11 +153,11 @@ class Snake(GameObject):
         if self.last:
             last_rect = pygame.Rect(self.last, (GRID_SIZE, GRID_SIZE))
             pygame.draw.rect(screen, BOARD_BACKGROUND_COLOR, last_rect)
-        
+
         head_rect = pygame.Rect(self.positions[0], (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, head_rect)
         pygame.draw.rect(screen, BORDER_COLOR, head_rect, 1)
-        
+
         for position in self.positions[1:]:
             rect = pygame.Rect(position, (GRID_SIZE, GRID_SIZE))
             pygame.draw.rect(screen, self.body_color, rect)
@@ -174,5 +195,5 @@ def main():
         pygame.display.update()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
