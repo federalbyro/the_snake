@@ -70,8 +70,8 @@ class GameObject:
         position (tuple): Позиция объекта на игровом поле.
         body_color (tuple): Цвет объекта.
     """
-
     def __init__(self, position, body_color=None):
+        """да поебать мне"""
         self.position = position
         self.body_color = body_color
 
@@ -85,40 +85,48 @@ class Apple(GameObject):
 
     Наследуется от GameObject.
     """
-
     def __init__(self, body_color=APPLE_COLOR):
+        """да поебать мне"""
         super().__init__(position=None, body_color=body_color)
         self.randomize_position()
 
     def randomize_position(self):
+        """да поебать мне"""
         x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
         y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
         self.position = (x, y)
 
     def draw(self):
+        """да поебать мне"""
         rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, rect)
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
 
 class Poison(Apple):
+    """да поебать мне"""
     def __init__(self, body_color=POISON_COLOR):
         super().__init__(body_color=body_color)
         self.randomize_position()
 
 
 class Stone(Apple):
+    """да поебать мне"""
     def __init__(self, body_color=(122, 127, 128)):
+        """да поебать мне"""
         super().__init__(body_color=body_color)
         self.randomize_position()
 
 
 class Snake(GameObject):
+    """да поебать мне"""
     def __init__(self, body_color=SNAKE_COLOR):
+        """да поебать мне"""
         super().__init__(position=None, body_color=body_color)
         self.reset()
 
     def reset(self):
+        """да поебать мне"""
         self.length = 1
         self.positions = [((SCREEN_WIDTH // 2), (SCREEN_HEIGHT // 2))]
         self.direction = RIGHT
@@ -126,11 +134,13 @@ class Snake(GameObject):
         self.last = None
 
     def update_direction(self):
+        """да поебать мне"""
         if self.next_direction:
             self.direction = self.next_direction
             self.next_direction = None
 
     def move(self):
+        """да поебать мне"""
         self.update_direction()
         # Получаем текущую позицию головы
         current = self.positions[0]
@@ -147,9 +157,11 @@ class Snake(GameObject):
                 self.positions.pop()
 
     def get_head_position(self):
+        """да поебать мне"""
         return self.positions[0]
 
     def draw(self):
+        """да поебать мне"""
         if self.last:
             last_rect = pygame.Rect(self.last, (GRID_SIZE, GRID_SIZE))
             pygame.draw.rect(screen, BOARD_BACKGROUND_COLOR, last_rect)
@@ -165,6 +177,7 @@ class Snake(GameObject):
 
 
 def main():
+    """да поебать мне"""
     clock = pygame.time.Clock()
     snake = Snake()
     apple = Apple()
