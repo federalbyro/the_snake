@@ -18,21 +18,16 @@ BOARD_BACKGROUND_COLOR = (0, 0, 0)
 BORDER_COLOR = (93, 216, 228)
 APPLE_COLOR = (255, 0, 0)
 SNAKE_COLOR = (0, 255, 0)
-POISON_COLOR = (105, 0, 198)  # Цвет для яда
+POISON_COLOR = (105, 0, 198)
 
-# Параметры игры:
-FPS = 10             # частота отрисовки кадров
+FPS = 10
 
-# Инициализация Pygame
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Змейка")
 clock = pygame.time.Clock()
 
 
-# ============================================================================
-# Базовый класс для игровых объектов (Apple, Poison, Stone)
-# ============================================================================
 class GameObj:
     def __init__(self, body_color):
         self.body_color = body_color
@@ -96,9 +91,7 @@ class Stone(GameObj):
         self.rand_pos()
 
 
-# ============================================================================
-# Класс для управления игроком (PlayerControl)
-# ============================================================================
+
 class PlayerControl:
     def __init__(self, body_color):
         self.body_color = body_color
@@ -116,9 +109,6 @@ class PlayerControl:
         pass
 
 
-# ============================================================================
-# Класс змейки (Snake), наследующий от PlayerControl
-# ============================================================================
 class Snake(PlayerControl):
     def __init__(self, body_color=SNAKE_COLOR):
         super().__init__(body_color)
@@ -186,9 +176,7 @@ class Snake(PlayerControl):
                 self.next_direction = RIGHT
 
 
-# ============================================================================
-# Основная функция игры
-# ============================================================================
+
 def main():
     snake = Snake()
     apple = Apple()
