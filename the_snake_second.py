@@ -199,8 +199,8 @@ def main():
         # Проверка столкновений: если голова змейки
         # совпадает с позицией игрового объекта,
         # вызываем его метод взаимодействия.
-        head_pos = snake.get_head_position()
-        for obj in game_objects:
+        head_pos = snake.get_head_position()#метод, который принимал GJ - будет прямой d ; можно переделать в Main - дожать, dep;
+        for obj in game_objects:#переделать main 
             if head_pos == obj.position:
                 obj.interact(snake)
 
